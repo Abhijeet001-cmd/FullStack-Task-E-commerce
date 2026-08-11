@@ -1,16 +1,24 @@
-function About(){
+// About.jsx
+// About page — kept from the original project
 
-    return(
+function About() {
 
-        <div>
+  return (
 
-            <h2>About Us</h2>
+    <div className="page-container">
 
-            <p>This is a beginner React E-Commerce Website.</p>
+      <h1>About Us</h1>
 
-        </div>
+      <p>This is a beginner React E-Commerce Website.</p>
 
-    );
+      <p>
+        Built to learn React concepts like useState, useEffect, useContext,
+        Props, React Router, Axios API calls, and more.
+      </p>
+
+    </div>
+
+  );
 
 }
 

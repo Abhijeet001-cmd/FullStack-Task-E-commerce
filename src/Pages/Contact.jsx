@@ -1,16 +1,20 @@
-function Contact(){
+// Contact.jsx
+// Contact page — kept from the original project
 
-    return(
+function Contact() {
 
-        <div>
+  return (
 
-            <h2>Contact Page</h2>
+    <div className="page-container">
 
-            <p>Email : abc@gmail.com</p>
+      <h1>Contact Us</h1>
 
-        </div>
+      <p>Email: abc@gmail.com</p>
+      <p>Phone: +91 9876543210</p>
 
-    );
+    </div>
+
+  );
 
 }
 

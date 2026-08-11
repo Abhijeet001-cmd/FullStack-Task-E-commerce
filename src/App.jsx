@@ -1,55 +1,72 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
+// App.jsx
+// Main application file — sets up routing and wraps everything in CartProvider
+// React Concept: Context Provider — CartProvider wraps all routes so every
+// component can access cart data via useCart()
 
-import Layout from "./Pages/Layout";
-import Home from "./Pages/Home";
-import About from "./Pages/About";
-import Contact from "./Pages/Contact";
-import Cart from "./Pages/Cart";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// Context Provider
+import { CartProvider } from "./context/CartContext";
+
+// Layout (contains Navbar + Outlet + Footer)
+import Layout from "./pages/Layout";
+
+// Pages
+import Home from "./pages/Home";
+import Products from "./pages/Products";
+import ProductDetails from "./pages/ProductDetails";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import CartPage from "./pages/CartPage";
+import CheckoutPage from "./pages/CheckoutPage";
+import NotFound from "./pages/NotFound";
 
 function App() {
 
-  const cart = [];
-
-  function addToCart(product){
-      cart.push(product);
-      alert(product.name + " Added");
-      console.log(cart);
-  }
-
   return (
 
-    <BrowserRouter>
+    // CartProvider wraps everything — makes cart available globally
+    <CartProvider>
 
-      <Routes>
+      <BrowserRouter>
 
-        <Route path="/" element={<Layout />}>
+        <Routes>
 
-            <Route
-              index
-              element={<Home addToCart={addToCart}/>}
-            />
+          {/* Layout route — Navbar and Footer wrap all child routes */}
+          {/* Outlet in Layout.jsx renders the matched child route */}
+          <Route path="/" element={<Layout />}>
 
-            <Route
-              path="about"
-              element={<About />}
-            />
+            {/* index route — shown at "/" */}
+            <Route index element={<Home />} />
 
-            <Route
-              path="contact"
-              element={<Contact />}
-            />
+            {/* Products listing page */}
+            <Route path="products" element={<Products />} />
 
-            <Route
-              path="cart"
-              element={<Cart />}
-            />
+            {/* Single product details — :id is a URL parameter */}
+            <Route path="product/:id" element={<ProductDetails />} />
 
-        </Route>
+            {/* About page */}
+            <Route path="about" element={<About />} />
 
-      </Routes>
+            {/* Contact page */}
+            <Route path="contact" element={<Contact />} />
 
-    </BrowserRouter>
+            {/* Cart page */}
+            <Route path="cart" element={<CartPage />} />
+
+            {/* Checkout page */}
+            <Route path="checkout" element={<CheckoutPage />} />
+
+            {/* 404 catch-all — path="*" matches any URL not defined above */}
+            <Route path="*" element={<NotFound />} />
+
+          </Route>
+
+        </Routes>
+
+      </BrowserRouter>
+
+    </CartProvider>
 
   );
 

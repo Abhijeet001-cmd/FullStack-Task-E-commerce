@@ -1,29 +1,30 @@
-import products from "../Data/Product";
-import ProductCard from "./Productcard";
+// ProductList.jsx
+// Displays a grid of ProductCard components
+// React Concept: Props — receives products array from parent
+// React Concept: .map() with key — renders a list of components
 
-function ProductList({addToCart}){
+import ProductCard from "./ProductCard";
 
-    return(
+function ProductList({ products }) {
 
-        <div className="products">
+  return (
 
-            {
+    <div className="product-list">
 
-                products.map((item)=>(
+      {/* .map() renders one ProductCard for each product */}
+      {/* key={product.id} — React needs unique keys to track list items */}
+      {products.map((product) => (
 
-                    <ProductCard
-                    key={item.id}
-                    product={item}
-                    addToCart={addToCart}
-                    />
+        <ProductCard
+          key={product.id}
+          product={product}
+        />
 
-                ))
+      ))}
 
-            }
+    </div>
 
-        </div>
-
-    );
+  );
 
 }
 

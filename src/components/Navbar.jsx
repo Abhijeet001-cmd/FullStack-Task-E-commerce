@@ -1,22 +1,43 @@
+// Navbar.jsx
+// Navigation bar with links and cart item count badge
+// React Concept: useContext — uses useCart() to show cart count
+// React Concept: Link — uses React Router's Link for navigation (no page reload)
+
 import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
-function Navbar(){
+function Navbar() {
 
-    return(
+  // Get cart count from Context
+  const { getCartCount } = useCart();
+  const cartCount = getCartCount();
 
-        <nav>
+  return (
 
-            <Link to="/">Home</Link>
+    <nav className="navbar">
 
-            <Link to="/about">About</Link>
+      <div className="nav-brand">
+        <Link to="/">🛒 E-Shop</Link>
+      </div>
 
-            <Link to="/contact">Contact</Link>
+      <div className="nav-links">
+        <Link to="/">Home</Link>
+        <Link to="/products">Products</Link>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
 
-            <Link to="/cart">Cart</Link>
+        {/* Cart link with item count badge */}
+        <Link to="/cart" className="cart-link">
+          Cart
+          {cartCount > 0 && (
+            <span className="cart-badge">{cartCount}</span>
+          )}
+        </Link>
+      </div>
 
-        </nav>
+    </nav>
 
-    );
+  );
 
 }
 
